@@ -56,12 +56,12 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     plenum_top_height = FancyOctobot.mold_top - 5
     plenum_meander_print_height = (plenum_top_height + plenum_bottom_height)/2.0
     plenum_meander_print_height = -6 # added 2015.02.03, changed from 6.9 to 6 on 2015.02.04
-    
+    plenum_meander_print_height = -5.5 #added 2015.02.06
     #line below commented out on 2015.02.03
     #module_top_print_height = -1 # max(LogicModule.module_hole_top+0.2,flow_connector_height_abs) # TODO: Compensate for this if it ends up being below the flow_connector_height_abs
-    module_top_print_height = -2.3
-    
+    module_top_print_height = -2.3    
     module_print_height_back = -4.3 # 2015.02.03 was -1
+    module_print_height_back = -3.5 # changed 2015.02.06
     e3DPGlobals.g.absolute()
     
     LogicModule.init(centerline = centerline_x, offset = flow_connectors_centerline_offset, print_height = module_top_print_height)
@@ -175,12 +175,12 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
         e3DMatrixPrinting.move_z_abs(module_print_height_back, vertical_travel_speed = e3DMatrixPrinting.default_z_drag_speed)
         e3DMatrixPrinting.travel_mode()
         
-        meander_front_y = -40 # 2015.02.03 - switched from -45
+        meander_front_y = -41 # 2015.02.03 - switched from -45, -40 was too close
         meander_back_y = -45 # 2015.02.03 - switched from -50
         meander_inner_x_offset = 3 # was originally 0.75 in Dan's code
         meander_outer_x_offset = 3 # was originally > 2 mm
         connection_overlap = 0.0   # what is this? it was originally in Dan's code as 0.5 originally
-        meander_print_speed = 0.6
+        meander_print_speed = 0.5 # switched from 0.6 on 2014.02.06
         meander_connection_dwell_time = 1
         
         e3DPGlobals.g.abs_move(x=centerline_x+x_offset_mult*meander_inner_x_offset, y=meander_back_y-connection_overlap)
@@ -211,13 +211,13 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     print_plenum_meander(Left=False)
 
 # SET THESE: LEG ACTUATOR ECOFLEX ZEROS
-left_zero = -58.0148
-right_zero = -58.028
+left_zero = -59.4745
+right_zero = -59.519
 
 FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_fuel_spider)     
 
 #The line below commented out on 2014.09.10 by RTruby, for Experiment C-95
-#e3DPGlobals.g.view('matplotlib')
+e3DPGlobals.g.view('matplotlib')
 #e3DPGlobals.g.view()
 e3DPGlobals.g.teardown()
 
