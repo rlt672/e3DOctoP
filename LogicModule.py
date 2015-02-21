@@ -17,8 +17,8 @@ import e3DMatrixPrinting
 import FancyOctobot
 
 # SET THESE:                         Hole depth abs machine
-hole_insertion_depth_abs_machine = -64.5             
-local_z_offset_from_machine_abs =  -59.2112 # left_eco_zero machine
+hole_insertion_depth_abs_machine = -61.4             
+local_z_offset_from_machine_abs =  -59.054 # left_eco_zero machine
 module_top_print_height_above_hole_bottom = 2
 # Calculate LOCAL coordinate print heights such that
 # local abs = abs machine - local_z_offset_from_machine_abs
@@ -31,12 +31,12 @@ module_hole_depth = hole_insertion_depth_abs_machine - local_z_offset_from_machi
 
 # USING ABS MACHINE COORDS  
 # SET THESE: MOLD CORNER COORDINATES - THE ABSOLUTE MACHINE COORDINATES OF THE NOZZLE'S STARTING POSITION AT THE TOP LEFT CORNER OF THE MOLD
-mold_home_pos_machine = (446.1478, 146.5129) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
+mold_home_pos_machine = (445.855, 146.887) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
 # SET THESE: HOLE COORDINATES _ ABSOLUTE MACHINE COORDINATES OF THE MODULE HOLES
-front_left_hole_pos_machine = (499.805, 114.405)
-front_right_hole_pos_machine = (502.237, 114.405)
-back_left_hole_pos_machine   = (498.1147, 108.493)
-back_right_hole_pos_machine = (503.3548, 108.493)
+front_left_hole_pos_machine = (499.859, 114.636)
+front_right_hole_pos_machine = (502.165, 114.636)
+back_left_hole_pos_machine   = (498.476, 109.202)
+back_right_hole_pos_machine = (503.556, 109.202)
 
 #subtract lists element-wise
 def subtract(a,b):
@@ -58,7 +58,7 @@ back_right_hole_pos =  subtract(back_right_hole_pos_machine,mold_home_pos_machin
 # print "Right output "+ str(back_right_hole_pos)
     
 module_front_edge_y = -28.5 # actually, the module front edge is positioned at -29.5, this is just for room
-module_back_edge_y =  -40   # actually, the module back edge is positioned at -39, this is just for room
+module_back_edge_y =  -41   # actually, the module back edge is positioned at -39, this is just for room
     
 hole_flush_dwell_time = 2.0 #was 5.0
 
