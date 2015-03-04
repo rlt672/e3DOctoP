@@ -17,8 +17,8 @@ import e3DMatrixPrinting
 import FancyOctobot
 
 # SET THESE:                         Hole depth abs machine
-hole_insertion_depth_abs_machine = -61.7           
-local_z_offset_from_machine_abs =  -57.78 # left_eco_zero machine
+hole_insertion_depth_abs_machine = -61.4          
+local_z_offset_from_machine_abs =  -57.981 # left_eco_zero machine
 module_top_print_height_above_hole_bottom = 2
 # Calculate LOCAL coordinate print heights such that
 # local abs = abs machine - local_z_offset_from_machine_abs
@@ -31,12 +31,12 @@ module_hole_depth = hole_insertion_depth_abs_machine - local_z_offset_from_machi
 
 # USING ABS MACHINE COORDS  
 # SET THESE: MOLD CORNER COORDINATES - THE ABSOLUTE MACHINE COORDINATES OF THE NOZZLE'S STARTING POSITION AT THE TOP LEFT CORNER OF THE MOLD
-mold_home_pos_machine = (445.52, 146.904) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
+mold_home_pos_machine = (446.279, 146.75) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
 # SET THESE: HOLE COORDINATES _ ABSOLUTE MACHINE COORDINATES OF THE MODULE HOLES
-front_left_hole_pos_machine = (499.038, 114.908)
-front_right_hole_pos_machine = (501.439, 114.908)
-back_left_hole_pos_machine   = (497.421, 109.364)
-back_right_hole_pos_machine = (502.654, 109.254)
+front_left_hole_pos_machine = (500.19, 114.675)
+front_right_hole_pos_machine = (502.5, 114.675)
+back_left_hole_pos_machine   = (498.975, 109.328)
+back_right_hole_pos_machine = (503.701, 109.328)
 
 #subtract lists element-wise
 def subtract(a,b):
