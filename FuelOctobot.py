@@ -59,7 +59,7 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     plenum_meander_print_height = (plenum_top_height + plenum_bottom_height)/2.0
     plenum_meander_print_height = -6 # added 2015.02.03, changed from 6.9 to 6 on 2015.02.04
     plenum_meander_print_height = -5.5 #added 2015.02.06
-    plenum_meander_print_height = -6.5
+    plenum_meander_print_height = -5.5
     #line below commented out on 2015.02.03
     #module_top_print_height = -1 # max(LogicModule.module_hole_top+0.2,flow_connector_height_abs) # TODO: Compensate for this if it ends up being below the flow_connector_height_abs
     module_top_print_height = -2.3 
@@ -216,8 +216,8 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     print_plenum_meander(Left=False)
 
 # SET THESE: LEG ACTUATOR ECOFLEX ZEROS
-left_zero = -57.981
-right_zero = -58.073
+left_zero = -57.8728
+right_zero = -57.6458
 
 FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_fuel_spider)     
 
