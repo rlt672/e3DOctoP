@@ -187,6 +187,7 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
         connection_overlap = 0.0   # what is this? it was originally in Dan's code as 0.5 originally
         meander_print_speed = 0.5 # switched from 0.6 on 2014.02.06
         meander_connection_dwell_time = 1
+        #meander_connection_dwell_time = 5 # added for D-46
         
         e3DPGlobals.g.abs_move(x=centerline_x+x_offset_mult*meander_inner_x_offset, y=meander_back_y-connection_overlap)
         e3DMatrixPrinting.print_mode(print_height_abs = plenum_meander_print_height, print_speed = meander_print_speed)
@@ -199,6 +200,7 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
         # Now, connect the fuel line to the module inlets
         safe_hole_connection_x_offset = meander_inner_x_offset
         e3DMatrixPrinting.move_z_abs(height = plenum_meander_print_height) # redundant?
+        e3DPGlobals.g.dwell(20) #added for D-46
         e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
         e3DPGlobals.g.abs_move(y = meander_front_y)
         e3DPGlobals.g.abs_move(x = centerline_x+x_offset_mult*meander_inner_x_offset)
@@ -216,8 +218,8 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     print_plenum_meander(Left=False)
 
 # SET THESE: LEG ACTUATOR ECOFLEX ZEROS
-left_zero = -57.8728
-right_zero = -57.6458
+left_zero = -58.7838
+right_zero = -58.8958
 
 FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_fuel_spider)     
 
