@@ -218,8 +218,8 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     print_plenum_meander(Left=False)
 
 # SET THESE: LEG ACTUATOR ECOFLEX ZEROS
-left_zero = -58.7838
-right_zero = -58.8958
+left_zero = -58.376
+right_zero = -58.530
 
 FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_fuel_spider)     
 
