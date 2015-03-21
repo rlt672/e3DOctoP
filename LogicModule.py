@@ -31,7 +31,7 @@ module_hole_depth = hole_insertion_depth_abs_machine - local_z_offset_from_machi
 
 # USING ABS MACHINE COORDS  
 # SET THESE: MOLD CORNER COORDINATES - THE ABSOLUTE MACHINE COORDINATES OF THE NOZZLE'S STARTING POSITION AT THE TOP LEFT CORNER OF THE MOLD
-mold_home_pos_machine = (445.068, 146.697) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
+mold_home_pos_machine = (445.093, 146.828) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
 # SET THESE: HOLE COORDINATES _ ABSOLUTE MACHINE COORDINATES OF THE MODULE HOLES
 front_left_hole_pos_machine = (498.296, 114.647)
 front_right_hole_pos_machine = (500.708, 114.647)
