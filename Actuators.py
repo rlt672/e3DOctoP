@@ -39,6 +39,8 @@ def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_an
     pad_print_speed = 4.5
     pad_print_speed = pad_print_speed * 0.75
     meander_separation_dist = pad_length/n_meanders
+    vent_stem_length = 1 # added 20150327
+    vent_spot_dwell = 0 # added 20150327
     
     def print_actuator_pad():
         """Helper funciton. Print one actuator pad here"""
@@ -76,6 +78,10 @@ def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_an
     
     #print actuator pad 2
     print_actuator_pad()
+    
+    #added 20150327: print short stem to vent
+    e3DMatrixPrinting.move_y(vent_stem_length, theta)
+    e3DPGlobals.g.dwell(vent_spot_dwell)
        
     e3DPGlobals.g.absolute()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     e3DMatrixPrinting.travel_mode()
