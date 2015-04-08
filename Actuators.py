@@ -12,7 +12,7 @@ import numpy as np
 import e3DMatrixPrinting
 import e3DPGlobals
 
-def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_angle = 0, forarm_postActuator_length =4, theta=0):
+def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_angle = 0, forarm_postActuator_length =4, theta=0, num_pads = 2):
     """Prints a soft actuator with the stem starting in the current position and rotated by theta. Assume nozzle is already at the correct height and already in print mode. (Continuation feature)
     
     Basic actuator geometry is
@@ -67,17 +67,26 @@ def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_an
     #print the forarm after the elbow bend to the first pad
     e3DMatrixPrinting.move_y(forarm_preActuator_length, theta)
     
+    # block below added on 2015.04.03
+    if num_pads == 1:
+        sign = (-1 if theta<0 else 1)
+        theta = sign * 120
+        print "theta_new"
+        print theta
+        e3DMatrixPrinting.move_y(1, theta) 
+    
     #print actuator pad 1
     print_actuator_pad()
     
-    #print connection stem to actuator second actuator pad
-    e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed*3) # *3 added on D-52
-    e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed/2) # *3 added on D-52
-    e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed) 
-    e3DMatrixPrinting.move_y(forarm_postActuator_length, theta)
+    if num_pads == 2:
+        #print connection stem to actuator second actuator pad
+        e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed*3) # *3 added on D-52
+        e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed/2) # *3 added on D-52
+        e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed) 
+        e3DMatrixPrinting.move_y(forarm_postActuator_length, theta)
     
-    #print actuator pad 2
-    print_actuator_pad()
+        #print actuator pad 2
+        print_actuator_pad()
     
     #added 20150327: print short stem to vent
     e3DMatrixPrinting.move_y(vent_stem_length, theta)

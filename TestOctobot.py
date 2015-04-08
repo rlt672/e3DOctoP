@@ -74,7 +74,7 @@ def print_test_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     e3DPGlobals.g.absolute()
     
     fuel_line_length = 1
-    needle_insertion_length = 6
+    needle_insertion_length = 3
     needle_insertion_separation = 0
     
     LogicModule.init(centerline = centerline_x, offset = flow_connectors_centerline_offset, print_height = module_top_print_height)
@@ -82,13 +82,13 @@ def print_test_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
     OctobotLogicModule.print_pressureChamber_for_test_octobot(Left=False, fuel_line = fuel_line_length, needle_insertion = needle_insertion_length, spacer = needle_insertion_separation/2)
     
 # SET THESE: LEG ACTUATOR ECOFLEX ZEROS
-left_zero = -56.3167
-right_zero = -56.4347
+left_zero = -58.781
+right_zero = -58.7612
 
 FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_test_spider)     
 
 #The line below commented out on 2014.09.10 by RTruby, for Experiment C-95
-e3DPGlobals.g.view('matplotlib')
+e3DPGlobals.g.view('mayavi')
 #e3DPGlobals.g.view()
 e3DPGlobals.g.teardown()
 

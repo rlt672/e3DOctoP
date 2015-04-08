@@ -57,6 +57,7 @@ arm_elbow_angles_deg = [80.0, 70.0, -62.0, -70.0] # first angle was 85.0
 arm_upperarm_lengths = [0.001, 10.73, 10.65, 10.76]
 arm_forarm_preActuator_length = 1
 arm_forarm_preActuator_length_arm1 = 4
+arm_forarm_preActuator_length_arm1 = 12
 arm_forarm_postActuator_lengths = [3.0, 5.0, 4.0, 6.0]
 # Note from RTruby, 2014.01.19: make sure to understand the following variables 
 arm_elbow_angles_deg_relative = list(np.array(arm_shoulder_angles_deg)-np.array(arm_elbow_angles_deg))
@@ -95,14 +96,14 @@ control_line_B_connection_x = mold_center_x + control_line_connector_x_dist_from
 '''
 
 # Rows are ordered front-to-back from 0-3 inclusive (4 total)
-def print_left_actuator(row, arm_forarm_preActuator_length):
+def print_left_actuator(row, arm_forarm_preActuator_length, num_pads):
     e3DMatrixPrinting.move_z_abs(actuator_print_height)
-    Actuators.print_actuator(theta = 0.5*np.pi-np.deg2rad(arm_shoulder_angles_deg[row]), elbow_angle = np.deg2rad(arm_elbow_angles_deg_relative[row]), upperarm_length = arm_upperarm_lengths[row], forarm_preActuator_length=arm_forarm_preActuator_length, forarm_postActuator_length = arm_forarm_postActuator_lengths[row])
+    Actuators.print_actuator(theta = 0.5*np.pi-np.deg2rad(arm_shoulder_angles_deg[row]), elbow_angle = np.deg2rad(arm_elbow_angles_deg_relative[row]), upperarm_length = arm_upperarm_lengths[row], forarm_preActuator_length=arm_forarm_preActuator_length, forarm_postActuator_length = arm_forarm_postActuator_lengths[row], num_pads = num_pads)
 
 right_side_offset = 5 #if it's not changed from 5 as it shood be then we'll know something's w
-def print_right_actuator(row, arm_forarm_preActuator_length):
+def print_right_actuator(row, arm_forarm_preActuator_length, num_pads):
     e3DMatrixPrinting.move_z_abs(actuator_print_height+right_side_offset)
-    Actuators.print_actuator(theta = -0.5*np.pi+np.deg2rad(arm_shoulder_angles_deg[row]), elbow_angle = -np.deg2rad(arm_elbow_angles_deg_relative[row]), upperarm_length = arm_upperarm_lengths[row], forarm_preActuator_length=arm_forarm_preActuator_length, forarm_postActuator_length = arm_forarm_postActuator_lengths[row])
+    Actuators.print_actuator(theta = -0.5*np.pi+np.deg2rad(arm_shoulder_angles_deg[row]), elbow_angle = -np.deg2rad(arm_elbow_angles_deg_relative[row]), upperarm_length = arm_upperarm_lengths[row], forarm_preActuator_length=arm_forarm_preActuator_length, forarm_postActuator_length = arm_forarm_postActuator_lengths[row], num_pads = num_pads)
     
 def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_logic):
     """"Print a fancy robot in the mold. Assume we start at the front left corner of the mold"""
@@ -173,7 +174,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
     e3DPGlobals.g.abs_move(x=control_line_A_x - routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[0])
     e3DPGlobals.g.abs_move(x=mold_center_x-arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_left_actuator(row=cur_arm_row, arm_forarm_preActuator_length=arm_forarm_preActuator_length_arm1)
+    print_left_actuator(row=cur_arm_row, arm_forarm_preActuator_length=arm_forarm_preActuator_length_arm1, num_pads = 1)
 
     #print control line B
     e3DPGlobals.g.abs_move(x=control_line_B_connection_x, y = control_line_back_y)
@@ -189,7 +190,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
     e3DPGlobals.g.abs_move(x=control_line_B_x + routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[0])
     e3DPGlobals.g.abs_move(x=mold_center_x+arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_right_actuator(row=cur_arm_row, arm_forarm_preActuator_length=arm_forarm_preActuator_length_arm1)
+    print_right_actuator(row=cur_arm_row, arm_forarm_preActuator_length=arm_forarm_preActuator_length_arm1, num_pads = 1)
             
     # print actuator A3 (second from top (row 1), right) bridging straight over control line B
     cur_arm_row = 1
@@ -200,7 +201,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.abs_move(x=control_line_B_x)
     e3DPGlobals.g.abs_move(x=control_line_B_x + routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[1])
     e3DPGlobals.g.abs_move(x=mold_center_x+arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_right_actuator(row=cur_arm_row, arm_forarm_preActuator_length=arm_forarm_preActuator_length)
+    print_right_actuator(row=cur_arm_row, arm_forarm_preActuator_length=arm_forarm_preActuator_length, num_pads = 2)
     
     #print actuator B3 (second from top (row 1), left) going around the control line of A3
     e3DPGlobals.g.abs_move(x=control_line_B_x, y=routing_branchpoints_y[2]) # connect to the control line midway between arm rows 1 and 2
@@ -210,7 +211,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.abs_move(x=control_line_A_x)
     e3DPGlobals.g.abs_move(x=control_line_A_x - routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[1])
     e3DPGlobals.g.abs_move(x=mold_center_x-arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length)
+    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2)
     
     ##print actuator A2 (second from bottom (row 3), left)
     cur_arm_row = 2
@@ -220,7 +221,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
     e3DPGlobals.g.abs_move(x=control_line_A_x - routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[2])
     e3DPGlobals.g.abs_move(x=mold_center_x-arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length)
+    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2)
     
     #print actuator B2 (second from bottom, right)
     e3DPGlobals.g.abs_move(x=control_line_B_x, y = routing_branchpoints_y[3]) # arm_rows_shoulder_y_abs[cur_arm_row]
@@ -229,7 +230,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
     e3DPGlobals.g.abs_move(x=control_line_B_x + routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[2])
     e3DPGlobals.g.abs_move(x=mold_center_x+arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_right_actuator(cur_arm_row, arm_forarm_preActuator_length)
+    print_right_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2)
     
     #print actuator B4 (bottom (row 3), left) bridging over control line A
     cur_arm_row=3
@@ -240,7 +241,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.abs_move(x=control_line_A_x)
     e3DPGlobals.g.abs_move(x=control_line_A_x - routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[3])
     e3DPGlobals.g.abs_move(x=mold_center_x-arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length)
+    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2)
         
     #print actuator A4 (bottom right) going around the control line of B4
     e3DPGlobals.g.abs_move(x=control_line_A_x, y=routing_branchpoints_y[5]) # y=(arm_rows_shoulder_y_abs[cur_arm_row]+arm_rows_shoulder_y_abs[cur_arm_row-1])/2.0
@@ -250,7 +251,7 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.abs_move(x=control_line_B_x)
     e3DPGlobals.g.abs_move(x=control_line_B_x + routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[3])
     e3DPGlobals.g.abs_move(x=mold_center_x+arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_right_actuator(cur_arm_row, arm_forarm_preActuator_length)
+    print_right_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2)
 
     #go back to home
     e3DPGlobals.g.abs_move(x=0,y=0)
