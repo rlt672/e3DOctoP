@@ -28,6 +28,7 @@ import MultiMaterial
 import Actuators
 import e3DPGlobals
 import FancyOctobot
+import FancyOctobot2
 import LogicModule
 import OctobotLogicModule
 
@@ -85,7 +86,13 @@ def print_test_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
 left_zero = -58.781
 right_zero = -58.7612
 
-FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_test_spider)     
+
+left_zeros = [-58, -75, -60, -61] # L1, L2, L3, L4, added 20150409
+right_zeros = [-58.5, -59.5, -60.5, -61.5] # R1, R2, R3, R4, added 20150409
+
+#FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_test_spider)     
+# added 20150409
+FancyOctobot2.print_robot(ecoflex_zero_left = left_zeros, ecoflex_zero_right = right_zeros, func_print_internal_soft_logic=print_test_spider)
 
 #The line below commented out on 2014.09.10 by RTruby, for Experiment C-95
 e3DPGlobals.g.view('mayavi')
