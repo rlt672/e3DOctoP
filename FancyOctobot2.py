@@ -47,6 +47,7 @@ mold_body_width = 2 * (55-49.4)   # width of narrowest part of the robot body
 #  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - 
 # Parameters related to actuators and downstream network geometry 
 actuator_print_height_offset = 0.1     # nozzle height above EcoFlex
+actuator_print_height_offset = 0.15 # added D-80, 2015.04.10
 actuator_print_height = 0 + actuator_print_height_offset # print height above EcoFlex
 arm_rows_shouder_x_centerline_offsets = [mold_center_x-x for x in [51.64, 50.11, 49.40, 49.01]]
 arm_rows_shoulder_y_abs = [-1*y for y in [22.07, 25.13, 28.35, 31.56]] # , 39.56
