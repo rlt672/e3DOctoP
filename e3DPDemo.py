@@ -31,7 +31,7 @@ def print_triangular_meander(print_height, N, edge, angle):
     angle_converted = pi*angle/180.0
     h = edge*(np.sqrt(3.0)/2)
     
-    e3DMatrixPrinting.print_mode(print_height_abs = print_height, print_speed = 10)
+    e3DMatrixPrinting.print_mode(print_height_abs = print_height, print_speed = 1.5)
     e3DPGlobals.g.relative()
     
     def trace_inner_units(repeats):
@@ -55,13 +55,13 @@ def print_triangular_meander(print_height, N, edge, angle):
     e3DMatrixPrinting.move_xy(x_distance = edge/2, y_distance = h, theta = angle_converted)
     trace_outer_edges(num_edges = m)
 
-number_of_edge_triangles = 10
-print_triangular_meander(-150, np.power(number_of_edge_triangles, 2), 15.0, 0.0)
+number_of_edge_triangles = 5
+print_triangular_meander(-79.7, np.power(number_of_edge_triangles, 2), 8.0, 0.0)
 e3DMatrixPrinting.travel_mode()
 h = 15.0*(np.sqrt(3.0)/2)
-e3DMatrixPrinting.move_y(h*number_of_edge_triangles/1.5)
-number_of_edge_triangles = 5
-print_triangular_meander(-140, np.power(number_of_edge_triangles, 2), 30.0, -60.0)
+e3DMatrixPrinting.move_y(h*number_of_edge_triangles/3)
+number_of_edge_triangles = 8
+print_triangular_meander(-77.7, np.power(number_of_edge_triangles, 2), 5.0, -60.0)
 e3DMatrixPrinting.travel_mode()
 
 e3DPGlobals.g.view('mayavi')

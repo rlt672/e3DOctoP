@@ -43,7 +43,7 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
     
     # bladder parameters
     bladder_print_speed = 0.5
-    bladder_layers = num_layers*2
+    bladder_layers = int(num_layers*2)
     bladder_layer_increment = 0.75
     bladder_spacing = spacer_spacing
     bladder_length = spacer_length-2
@@ -53,7 +53,8 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
     bus_line_print_speed = 0.25
     bus_line_length = num_spacers * spacer_spacing
     
-    # registration parameters
+    # sensor parameters
+    sensor_print_speed = 1
     
     spacer_print_height = substrate_zero + spacer_layer_increment
         
@@ -71,7 +72,7 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
             e3DMatrixPrinting.travel_mode()
         
     bladder_print_height = (((spacer_layers + 2) * spacer_layer_increment/2) + substrate_zero)
-    
+        
     def print_bladders():
         e3DMatrixPrinting.move_x(-1*spacer_spacing*(num_spacers-1))
         e3DMatrixPrinting.move_x(-1*bladder_spacing/2.0)
@@ -84,23 +85,36 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
                 e3DPGlobals.g.move(z = bladder_layer_increment)
             e3DMatrixPrinting.travel_mode()
             e3DMatrixPrinting.move_x(bladder_spacing)
-            
+    
+    bus_line_print_height = bladder_print_height + ((bladder_layers+1) * bladder_layer_increment) # should this be bladder_layers+1?
+    
     def print_bladder_bus_line():
         e3DMatrixPrinting.move_x(-1*bladder_spacing*(num_bladders))
-        bus_line_print_height = bladder_print_height + ((bladder_layers + 1) * bladder_layer_increment)
         e3DMatrixPrinting.print_mode(print_height_abs = bus_line_print_height, print_speed = 10)
         e3DPGlobals.g.feed(bus_line_print_speed)
-        e3DMatrixPrinting.move_x(bladder_spacing*(num_bladders))
+        e3DMatrixPrinting.move_x(bladder_spacing*(num_bladders-0.5))
         e3DMatrixPrinting.travel_mode()
     
-   # def print_sensor():
+    def print_sensor():
+       sensor_width = 4
+       sensor_height_offset = 0.5
+       sensor_length_offset = 2
+       e3DMatrixPrinting.move_y(sensor_width/2)
+       e3DMatrixPrinting.print_mode(print_height_abs = bus_line_print_height+sensor_height_offset, print_speed = 10)
+       e3DPGlobals.g.feed(sensor_print_speed)
+       e3DMatrixPrinting.move_x(-1*bladder_spacing*(num_bladders-0.5)-sensor_length_offset)
+       e3DMatrixPrinting.move_y(-1*sensor_width)
+       e3DMatrixPrinting.move_x(bladder_spacing*(num_bladders-0.5)+sensor_length_offset)
+       e3DMatrixPrinting.travel_mode()
+        
     
     print_bladder_spacers()
     print_bladders()
     print_bladder_bus_line()
+    print_sensor()
 
 
-print_pneunet(num_bladders = 5, num_layers = 4, substrate_zero = -68.729)
+print_pneunet(num_bladders = 5, num_layers = 4, substrate_zero = -70.237)
     
 
 e3DPGlobals.g.view('matplotlib')
