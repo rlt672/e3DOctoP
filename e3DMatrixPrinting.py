@@ -29,8 +29,8 @@ default_inlet_length = 2 # length of needle insertion inlets
 default_inlet_print_speed = 0.5 # speed for making needle insertion inlets
 default_print_speed = 1.5 # print speed used for most channels/traces
 default_mold_z_zero = 1 # Height of the top of the mold relative to work z zero. Unless otherwise specified, all other z coordinates or heights are relative to the work zero (top of ecoflex), NOT the mold top.
-default_mold_z_zero = -55 # for not printing in mold
-default_travel_height_abs = default_mold_z_zero+3 # height above the work zero (ecoflex top) to travel in air
+default_mold_z_zero = -50 # for not printing in mold
+default_travel_height_abs = default_mold_z_zero + 3 # height above the work zero (ecoflex top) to travel in air
 # default_z_drag_speed set to 0.25 on 2014.11.21 by RLT; was originally 0.5
 default_z_drag_speed = 0.5/4 # speed to "drag" vertical connections up
 default_z_drag_speed = 0.5/2 # added 2015.02.06

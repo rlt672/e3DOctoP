@@ -27,13 +27,14 @@ import MultiMaterial
 # Soft robot features
 import Actuators
 import e3DPGlobals 
-import FancyOctobot
+#import FancyOctobot
+import FancyOctobot2
 import LogicModule
    
 def get_pressure_channel_back_y():
-    #if (LogicModule.module_top_print_height > FancyOctobot.control_line_height_abs):
+    #if (LogicModule.module_top_print_height > FancyOctobot2.control_line_height_abs):
     #    ramp_angle = 50
-    #    ramp_height = LogicModule.module_top_print_height - FancyOctobot.control_line_height_abs
+    #    ramp_height = LogicModule.module_top_print_height - FancyOctobot2.control_line_height_abs
     #    ramp_length = ramp_height/np.tan(np.deg2rad(ramp_angle))
     #    print "Ramp height is "+str(ramp_height)+" and length is " + str(ramp_length)
     #    return LogicModule.module_front_edge_y + ramp_length
@@ -58,23 +59,23 @@ def print_output_hole_to_flow_line_with_pressureChamber(Left, hole_pos):
     # Print a pressure chamber/connection from cliff base to the flow channel ends
     e3DPGlobals.g.write("\n; PRINT PRESSURE CHAMBER FOR " + ("LEFT" if Left else "RIGHT") + " SIDE")
     MultiMaterial.change_tool(1) # switch to platinum
-    e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y) # move over front of the front edge of the module ("cliff")
-    e3DMatrixPrinting.print_mode(print_height_abs=FancyOctobot.control_line_height_abs)
+    e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y) # move over front of the front edge of the module ("cliff")
+    e3DMatrixPrinting.print_mode(print_height_abs=FancyOctobot2.control_line_height_abs)
     e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
     e3DPGlobals.g.feed(pressure_chamber_speed)
-    e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_chamber_total_length) # print up to the channel line back end # FancyOctobot.control_line_back_y + pressure_channel_overlap
+    e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_chamber_total_length) # print up to the channel line back end # FancyOctobot2.control_line_back_y + pressure_channel_overlap
     e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
     e3DMatrixPrinting.travel_mode()
     MultiMaterial.change_tool(0)
     
-    print "PRESSURE CHAMBER TOTAL LENGTH IS " + str(FancyOctobot.control_line_back_y + pressure_channel_overlap-pressure_channel_back_y)   
+    print "PRESSURE CHAMBER TOTAL LENGTH IS " + str(FancyOctobot2.control_line_back_y + pressure_channel_overlap-pressure_channel_back_y)   
                                                       
     # Print a vertical line in the hole to the top of the module
     e3DPGlobals.g.write("\n; PRINT IN HOLE OF " + ("LEFT" if Left else "RIGHT") + " SIDE")
     LogicModule.interface_with_hole(Left=Left, Front=True, to_cliff = False)
             
     # drag up the cliff and over to the hole top in pluronic
-    if (LogicModule.module_top_print_height > FancyOctobot.control_line_height_abs): 
+    if (LogicModule.module_top_print_height > FancyOctobot2.control_line_height_abs): 
         print "\t CLIFF NEEDED"
         
         # make a standard cliff - no ramp
@@ -82,8 +83,8 @@ def print_output_hole_to_flow_line_with_pressureChamber(Left, hole_pos):
         e3DMatrixPrinting.travel_mode()
 
         ramp_height = 0.0
-        e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_channel_overlap)
-        e3DMatrixPrinting.print_mode(print_height_abs = FancyOctobot.control_line_height_abs, print_speed = e3DMatrixPrinting.default_inlet_print_speed)
+        e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_channel_overlap)
+        e3DMatrixPrinting.print_mode(print_height_abs = FancyOctobot2.control_line_height_abs, print_speed = e3DMatrixPrinting.default_inlet_print_speed)
         e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
         e3DPGlobals.g.abs_move(y=pressure_channel_back_y)
         e3DMatrixPrinting.move_z_abs(height = LogicModule.module_top_print_height+ramp_height, vertical_travel_speed = e3DMatrixPrinting.default_z_drag_speed) # drag z up the cliff 
@@ -94,11 +95,11 @@ def print_output_hole_to_flow_line_with_pressureChamber(Left, hole_pos):
         e3DMatrixPrinting.travel_mode()
 
         ## ramp down from logic module print height to pressure channel (control line) height
-        #e3DMatrixPrinting.move_z_abs(height = FancyOctobot.control_line_height_abs, vertical_travel_speed = e3DMatrixPrinting.default_z_drag_speed) # drag z up the cliff 
+        #e3DMatrixPrinting.move_z_abs(height = FancyOctobot2.control_line_height_abs, vertical_travel_speed = e3DMatrixPrinting.default_z_drag_speed) # drag z up the cliff 
         #e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
-        #e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=LogicModule.module_front_edge_y)
-        #e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y, z=FancyOctobot.control_line_height_abs) # move over front of the front edge of the module ("cliff")
-        #e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_channel_overlap) # move over front of the front edge of the module ("cliff")
+        #e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=LogicModule.module_front_edge_y)
+        #e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y, z=FancyOctobot2.control_line_height_abs) # move over front of the front edge of the module ("cliff")
+        #e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_channel_overlap) # move over front of the front edge of the module ("cliff")
         #e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
         #e3DMatrixPrinting.travel_mode()
     else:
@@ -123,20 +124,20 @@ def print_pressureChamber_for_test_octobot(Left, fuel_line, needle_insertion, sp
     # Print a pressure chamber/connection from cliff base to the flow channel ends
     e3DPGlobals.g.write("\n; PRINT PRESSURE CHAMBER FOR " + ("LEFT" if Left else "RIGHT") + " SIDE")
     MultiMaterial.change_tool(1) # switch to platinum
-    e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y) # move over front of the front edge of the module ("cliff")
-    e3DMatrixPrinting.print_mode(print_height_abs=FancyOctobot.control_line_height_abs)
+    e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y) # move over front of the front edge of the module ("cliff")
+    e3DMatrixPrinting.print_mode(print_height_abs=FancyOctobot2.control_line_height_abs)
     e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
     e3DPGlobals.g.feed(pressure_chamber_speed)
-    e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_chamber_total_length) # print up to the channel line back end # FancyOctobot.control_line_back_y + pressure_channel_overlap
+    e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y+pressure_chamber_total_length) # print up to the channel line back end # FancyOctobot2.control_line_back_y + pressure_channel_overlap
     e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
     e3DMatrixPrinting.travel_mode()
     MultiMaterial.change_tool(0) # switch to Pluronic
     # move back to upstream end of reaction chamber
-    e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y)
-    e3DMatrixPrinting.print_mode(print_height_abs=FancyOctobot.control_line_height_abs)
+    e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line, y=pressure_channel_back_y)
+    e3DMatrixPrinting.print_mode(print_height_abs=FancyOctobot2.control_line_height_abs)
     e3DPGlobals.g.dwell(pressure_chamber_connection_dwell_time)
     e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed)
-    e3DPGlobals.g.abs_move(x=FancyOctobot.mold_center_x+x_offset_mult*FancyOctobot.control_line_connector_x_dist_from_center_line+x_offset_mult*spacer,y = pressure_channel_back_y-fuel_line)
+    e3DPGlobals.g.abs_move(x=FancyOctobot2.mold_center_x+x_offset_mult*FancyOctobot2.control_line_connector_x_dist_from_center_line+x_offset_mult*spacer,y = pressure_channel_back_y-fuel_line)
     e3DPGlobals.g.feed(e3DMatrixPrinting.default_print_speed/4)
     e3DPGlobals.g.abs_move(y = pressure_channel_back_y-fuel_line-needle_insertion)
     e3DPGlobals.g.dwell(20)
