@@ -91,6 +91,9 @@ def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_an
     #added 20150327: print short stem to vent
     e3DMatrixPrinting.move_y(vent_stem_length, theta)
     e3DPGlobals.g.dwell(vent_spot_dwell)
+    #added 20150501, Experiment D-104 to avoid blobs at end of actuator
+    e3DMatrixPrinting.turn_pressure_off(com_port = 1, start_stop_dwell_time = 0)
+    e3DMatrixPrinting.move_y(2, theta)
        
     e3DPGlobals.g.absolute()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     e3DMatrixPrinting.travel_mode()
