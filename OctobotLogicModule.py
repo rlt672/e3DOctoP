@@ -43,8 +43,10 @@ def get_pressure_channel_back_y():
 
 pressure_chamber_speed = 0.5
 pressure_chamber_connection_dwell_time = 1.0
+pressure_chamber_connection_dwell_time = 2.0 # changed on 2015.05.07
 pressure_channel_overlap = 0.5 # overlap for pressure chamber connections
 pressure_chamber_total_length = 2.5 # was 3, changed on 2015.01.21
+pressure_chamber_total_length = 2 # changed on 2015.05.07
 
 # print the front left hole to control line A
 def print_output_hole_to_flow_line_with_pressureChamber(Left, hole_pos):

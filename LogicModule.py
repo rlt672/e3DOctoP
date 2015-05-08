@@ -17,8 +17,8 @@ import e3DMatrixPrinting
 import FancyOctobot2
 
 # SET THESE:                         Hole depth abs machine
-hole_insertion_depth_abs_machine = -60.4
-local_z_offset_from_machine_abs =  -56.7122 # left_eco_zero machine
+hole_insertion_depth_abs_machine = -60.6
+local_z_offset_from_machine_abs =  -57.1126 # left_eco_zero machine
 module_top_print_height_above_hole_bottom = 2
 # Calculate LOCAL coordinate print heights such that
 # local abs = abs machine - local_z_offset_from_machine_abs
@@ -32,15 +32,15 @@ module_hole_depth = hole_insertion_depth_abs_machine - local_z_offset_from_machi
 # USING ABS MACHINE COORDS  
 
 # SET THESE: MOLD CORNER COORDINATES - THE ABSOLUTE MACHINE COORDINATES OF THE NOZZLE'S STARTING POSITION AT THE TOP LEFT CORNER OF THE MOLD
-mold_home_pos_machine = (443.192, 146.791) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
+mold_home_pos_machine = (445.6075, 147.174) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
 
 # SET THESE: HOLE COORDINATES _ ABSOLUTE MACHINE COORDINATES OF THE MODULE HOLES
-front_left_hole_pos_machine = (495.5225, 114.141)
-front_right_hole_pos_machine = (501.0255, 114.141)
-back_left_hole_pos_machine   = (495.1525, 110.789)
-back_right_hole_pos_machine = (501.3765, 110.789)
-check_valve_left_hole_pos_machine = (496.4505, 107.096)  # added 20150421 for D-90
-check_valve_right_hole_pos_machine = (500.3065, 107.096) # added 20150421 for D-90
+front_left_hole_pos_machine = (497.751, 114.839)
+front_right_hole_pos_machine = (503.476, 114.839)
+back_left_hole_pos_machine   = (497.845, 110.902)
+back_right_hole_pos_machine = (503.852, 111.023)
+check_valve_left_hole_pos_machine = (499.119, 107.452)  # added 20150421 for D-90
+check_valve_right_hole_pos_machine = (502.8505, 107.452) # added 20150421 for D-90
 
 #subtract lists element-wise
 def subtract(a,b):
@@ -53,6 +53,7 @@ check_valve_left_hole_pos = subtract(check_valve_left_hole_pos_machine, mold_hom
 check_valve_right_hole_pos = subtract(check_valve_right_hole_pos_machine, mold_home_pos_machine) # added 20150421 for D-90
 
 module_front_edge_y = -28.5 # actually, the module front edge is positioned at -29.5, this is just for room
+module_front_edge_y = -28 # added 2015.05.07
 module_back_edge_y =  -41    # actually, the module back edge is positioned at -39, this is just for room
 module_back_edge_y = -47.5     # added 20150421 for D-90, for use with new octobot molds for more complicated modules
 hole_flush_dwell_time = 4.0 #was 5.0

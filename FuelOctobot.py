@@ -133,8 +133,8 @@ def print_fuel_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
 left_zero = -58.725
 right_zero = -58.8127
 # left_zeros and right_zeros are needed for FancyOctobot2
-left_zeros = [-56.8804, -56.713, -56.7122, -56.5274] # L1, L2, L3, L4, added 20150409
-right_zeros = [-56.8982, -56.761, -56.765, -56.7286] # R1, R2, R3, R4, added 20150409
+left_zeros = [-57.2102, -57.1204, -57.1126, -57.1] # L1, L2, L3, L4, added 20150409
+right_zeros = [-57.301, -57.1908, -57.1744, -57.1608] # R1, R2, R3, R4, added 20150409
 
 #FancyOctobot was used up until Experiment D-90 (2015.04.21)
 #FancyOctobot2.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_fuel_spider)     
