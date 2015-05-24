@@ -27,7 +27,7 @@ import MultiMaterial
 # Soft robot features
 import Actuators
 import e3DPGlobals
-import FancyOctobot
+#import FancyOctobot
 import FancyOctobot2
 import LogicModule
 import OctobotLogicModule
@@ -87,8 +87,8 @@ def print_test_spider(flow_connector_height_abs, centerline_x, flow_connectors_c
 #right_zero = -58.7612
 
 
-left_zeros = [-57.3652, -57.2957, -57.3389, -57.3503] # L1, L2, L3, L4, added 20150409
-right_zeros = [-57.503, -57.4661, -57.4969, -57.5292] # R1, R2, R3, R4, added 20150409
+left_zeros = [-58.2714, -58.1632, -58.11634, -58.1009] # L1, L2, L3, L4, added 20150409
+right_zeros = [-58.4579, -58.2907, -58.2897, -58.3297] # R1, R2, R3, R4, added 20150409
 
 #FancyOctobot.print_robot(ecoflex_zero_left = left_zero, ecoflex_zero_right = right_zero, func_print_internal_soft_logic=print_test_spider)     
 # added 20150409

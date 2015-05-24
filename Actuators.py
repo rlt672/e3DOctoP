@@ -39,8 +39,8 @@ def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_an
     pad_print_speed = 4.5
     pad_print_speed = pad_print_speed * 0.75
     meander_separation_dist = pad_length/n_meanders
-    vent_stem_length = 1 # added 20150327
-    vent_spot_dwell = 0 # added 20150327
+    vent_stem_length = 1.5 # added 20150327
+    vent_spot_dwell = 0.5 # added 20150327
     
     def print_actuator_pad():
         """Helper funciton. Print one actuator pad here"""
@@ -93,6 +93,7 @@ def print_actuator(upperarm_length = 11, forarm_preActuator_length = 1, elbow_an
     e3DPGlobals.g.dwell(vent_spot_dwell)
     #added 20150501, Experiment D-104 to avoid blobs at end of actuator
     e3DMatrixPrinting.turn_pressure_off(com_port = 1, start_stop_dwell_time = 0)
+    e3DPGlobals.g.dwell(1)
     e3DMatrixPrinting.move_y(2, theta)
        
     e3DPGlobals.g.absolute()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

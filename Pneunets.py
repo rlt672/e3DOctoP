@@ -114,7 +114,7 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
     print_sensor()
 
 
-print_pneunet(num_bladders = 5, num_layers = 6, substrate_zero = -30.844-17.5)
+print_pneunet(num_bladders = 5, num_layers = 6, substrate_zero = -56.64)
 #print_pneunet(num_bladders = 3, num_layers = 3, substrate_zero = -55.08)
 
 e3DPGlobals.g.view('matplotlib')
