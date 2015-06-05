@@ -31,35 +31,39 @@ def print_void_layer(length, width):
         
 def print_pneunet(num_bladders, num_layers, substrate_zero):
    
-    # for printing at 85 psi                           
+    # "80" = for printing at 80 psi with microgels and long blue tip
+    # "85" = for printing at 85 psi with 27% F127 with lavendar tip                           
     # bladder spacer parameters
-    spacer_print_speed = 0.5
-    spacer_print_speed = 2*1.5
-    spacer_layers = num_layers*2
-    spacer_layer_increment = 0.65
-    spacer_spacing = 8
+    spacer_print_speed = 4 # "80" 
+    spacer_print_speed = 0.5 # "85"
+    spacer_layers = int(num_layers)
+    spacer_layer_increment = 0.82 # "80" 
+    spacer_layer_increment = 0.8  # "85"
     spacer_spacing = 6
     spacer_length = 12
-    spacer_width = 0.8
+    spacer_width = 0.85 # "80" 
+    spacer_with = 1 # "85"
     num_spacers = num_bladders - 1
     
     # bladder parameters
-    bladder_print_speed = 0.5
-    bladder_print_speed = 2
-    bladder_layers = int(num_layers*2)
-    bladder_layer_increment = 0.65
+    bladder_print_speed = 3 # "80" 
+    bladder_print_speed = 0.5 # "85"
+    bladder_layers = int(num_layers)
+    bladder_layer_increment = 0.9 # "80" 
+    bladder_layer_increment = 0.8 # "85"
     bladder_spacing = spacer_spacing
     bladder_length = spacer_length-2
-    bladder_width = spacer_width*2
+    bladder_width = 1
     
     
     # bus line parameters
-    bus_line_print_speed = 0.5*1.5
+    bus_line_print_speed = 1 # "80"
+    bus_line_print_speed = 0.5 # "85"
     bus_line_length = num_spacers * spacer_spacing
     
     # sensor parameters
-    sensor_print_speed = 2
-    sensor_print_speed = 4
+    sensor_print_speed = 5 # "80"
+    sensor_print_speed = 2 # "85"
     
     spacer_print_height = substrate_zero + spacer_layer_increment
         
@@ -69,19 +73,19 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
         for spacer in range(num_spacers):
             e3DMatrixPrinting.move_x(spacer_spacing)
             spacer_print_height = substrate_zero + spacer_layer_increment
-            e3DMatrixPrinting.print_mode(print_height_abs = spacer_print_height, print_speed = 20)
+            e3DMatrixPrinting.print_mode(print_height_abs = spacer_print_height, print_speed = 50)
             e3DPGlobals.g.feed(spacer_print_speed)
             for layer in range(spacer_layers):
                 print_void_layer(length = spacer_length, width = spacer_width)
+                e3DPGlobals.g.feed(10)
                 e3DPGlobals.g.move(z = spacer_layer_increment)
+                e3DPGlobals.g.feed(spacer_print_speed)
             e3DMatrixPrinting.travel_mode()
         
-    bladder_print_height = (((spacer_layers + 2) * spacer_layer_increment/2) + substrate_zero)
+    bladder_print_height = (3 * spacer_layer_increment) + substrate_zero
         
     def print_bladders():
-        e3DMatrixPrinting.move_x(-1*spacer_spacing*(num_spacers-1))
-        e3DMatrixPrinting.move_x(-1*bladder_spacing/2.0)
-        #bladder_print_height = (((spacer_layers + 2) * spacer_layer_increment/2) + substrate_zero)
+        e3DMatrixPrinting.move_x(-1*spacer_spacing*(num_spacers-1)-1*bladder_spacing/2.0)
         for bladder in range(num_bladders):    
             e3DMatrixPrinting.print_mode(print_height_abs = bladder_print_height, print_speed = 20)
             e3DPGlobals.g.feed(bladder_print_speed)
@@ -119,7 +123,7 @@ def print_pneunet(num_bladders, num_layers, substrate_zero):
     print_sensor()
 
 
-print_pneunet(num_bladders = 6, num_layers = 6, substrate_zero = -48.528)
+print_pneunet(num_bladders = 9, num_layers = 12, substrate_zero = -73.805)
 #print_pneunet(num_bladders = 3, num_layers = 3, substrate_zero = -55.08)
 
 e3DPGlobals.g.view('matplotlib')

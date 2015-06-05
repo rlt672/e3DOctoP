@@ -241,7 +241,8 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.abs_move(x=control_line_A_x)
     e3DPGlobals.g.abs_move(x=control_line_A_x - routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[3])
     e3DPGlobals.g.abs_move(x=mold_center_x-arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2, zero_reference_diff = ecoflex_zero_left[cur_arm_row]-MACHINE_ZERO)
+    # arm_formarm_preActuator_length + 2 added 20150604
+    print_left_actuator(cur_arm_row, arm_forarm_preActuator_length+2, num_pads = 2, zero_reference_diff = ecoflex_zero_left[cur_arm_row]-MACHINE_ZERO)
         
     #print actuator A4 (bottom right) going around the control line of B4
     e3DPGlobals.g.abs_move(x=control_line_A_x, y=routing_branchpoints_y[5]) # y=(arm_rows_shoulder_y_abs[cur_arm_row]+arm_rows_shoulder_y_abs[cur_arm_row-1])/2.0
@@ -251,7 +252,8 @@ def print_robot(ecoflex_zero_left, ecoflex_zero_right, func_print_internal_soft_
     e3DPGlobals.g.abs_move(x=control_line_B_x)
     e3DPGlobals.g.abs_move(x=control_line_B_x + routing_turnpoint_from_lines_x, y=routing_leg_offshoot_points[3])
     e3DPGlobals.g.abs_move(x=mold_center_x+arm_rows_shouder_x_centerline_offsets[cur_arm_row], y=arm_rows_shoulder_y_abs[cur_arm_row])
-    print_right_actuator(cur_arm_row, arm_forarm_preActuator_length, num_pads = 2, zero_reference_diff = ecoflex_zero_right[cur_arm_row]-MACHINE_ZERO)
+    # arm_formarm_preActuator_length + 2 added 20150604
+    print_right_actuator(cur_arm_row, arm_forarm_preActuator_length+2, num_pads = 2, zero_reference_diff = ecoflex_zero_right[cur_arm_row]-MACHINE_ZERO)
 
     #go back to home
     e3DPGlobals.g.abs_move(x=0,y=0)

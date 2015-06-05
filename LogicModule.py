@@ -17,8 +17,8 @@ import e3DMatrixPrinting
 import FancyOctobot2
 
 # SET THESE:                         Hole depth abs machine
-hole_insertion_depth_abs_machine = -60.6
-local_z_offset_from_machine_abs =  -58.11634 # left_eco_zero machine
+hole_insertion_depth_abs_machine = -60.2
+local_z_offset_from_machine_abs =  -56.6996 # left_eco_zero machine
 module_top_print_height_above_hole_bottom = 2
 # Calculate LOCAL coordinate print heights such that
 # local abs = abs machine - local_z_offset_from_machine_abs
@@ -32,15 +32,15 @@ module_hole_depth = hole_insertion_depth_abs_machine - local_z_offset_from_machi
 # USING ABS MACHINE COORDS  
 
 # SET THESE: MOLD CORNER COORDINATES - THE ABSOLUTE MACHINE COORDINATES OF THE NOZZLE'S STARTING POSITION AT THE TOP LEFT CORNER OF THE MOLD
-mold_home_pos_machine = (446.07, 146.88) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
+mold_home_pos_machine = (445.56, 146.973) # From August 2014, 444.836, 143.897 - Note by RTruby, 2014.09.10
 
 # SET THESE: HOLE COORDINATES _ ABSOLUTE MACHINE COORDINATES OF THE MODULE HOLES
-front_left_hole_pos_machine = (497.751, 114.839)
-front_right_hole_pos_machine = (503.476, 114.839)
-back_left_hole_pos_machine   = (497.845, 110.902)
-back_right_hole_pos_machine = (503.852, 111.023)
-check_valve_left_hole_pos_machine = (499.119, 107.452)  # added 20150421 for D-90
-check_valve_right_hole_pos_machine = (502.8505, 107.452) # added 20150421 for D-90
+front_left_hole_pos_machine = (497.838, 114.263)
+front_right_hole_pos_machine = (503.436, 114.263)
+back_left_hole_pos_machine   = (497.776, 110.312)
+back_right_hole_pos_machine = (503.781, 110.312)
+check_valve_left_hole_pos_machine = (498.908, 106.794)  # added 20150421 for D-90
+check_valve_right_hole_pos_machine = (502.582, 106.794) # added 20150421 for D-90
 
 #subtract lists element-wise
 def subtract(a,b):
